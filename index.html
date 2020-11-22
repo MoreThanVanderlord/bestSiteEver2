@@ -1,5 +1,21 @@
 <head>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<style>
+   body{
+    background-color: #121212;
+   } 
+   div {
+   
+    font-family: Helvetica;
+	font-size: 25;
+    color: #AAC789; 
+   }
+   p {
+    font-family: Helvetica;
+	font-size: 21;
+    color: #AAC789; /* Цвет текста */
+   }
+  </style>
 <script>
 
 
@@ -8,13 +24,21 @@ var next = "";
 var priv = "";
 
 function LoadNext() {
-	load();
+	load(next);
 }
 
-function load() {
+function LoadPriv() {
+	load(priv);
+}
+
+function load(value) {
 console.log(next);
 const proxyurl = "https://cors-anywhere.herokuapp.com/";
-const url = "https://readlightnovels.net/lady-lins-first-ever-journey-to-immortality/chapter-81-steal-the-fire-ball-spell.html"; // site that doesn’t send Access-Control-*
+if(value == "") {
+	var url = "https://readlightnovels.net/lady-lins-first-ever-journey-to-immortality/chapter-81-steal-the-fire-ball-spell.html"; // site that doesn’t send Access-Control-*
+} else {
+	var url = value;
+}
 fetch(proxyurl + url) 
 .then(response => response.text())
 .then(contents => insertToHtml(contents))
@@ -22,24 +46,16 @@ fetch(proxyurl + url)
 }
 
 function insertToHtml(contents) {
-let name = "my name";
-let value = "John Smith"
+	document.cookie = "user=John; path=/; expires=Tue, 19 Jan 2038 03:14:07 GMT" 
 
-// кодирует в my%20name=John%20Smith
-document.cookie = encodeURIComponent(name) + '=' + encodeURIComponent(value);
-
-//console.log(htmlText.innerHTML);
-//console.log(htmlText.innerHTML);
-$( "#header" ).append($(contents).find(".chapter-content").find("h3"))
-$( "#content" ).append($(contents).find(".chapter-content").find("p")) 
+	//console.log(htmlText.innerHTML);
+	//console.log(htmlText.innerHTML);
+	$("#header").empty();
+	$( "#header" ).append($(contents).find(".chapter-content").find("h3"))
+	$( "#content" ).append($(contents).find(".chapter-content").find("p")) 
  
-next = $(contents).find("#next_chap")[0].href;
-priv = $(contents).find("#priv_chap")[0].href;
-	htmlText.each(function( index ) {
-//	$("body").add('p').text( $( this ).text())
-//	document.body.innerHTML += $( this )
-	 // console.log( index + ": " + $( this ).text() );
-	}); 
+	next = $(contents).find("#next_chap")[0].href;
+	priv = $(contents).find("#priv_chap")[0].href; 
 }
 </script>
 </head>
