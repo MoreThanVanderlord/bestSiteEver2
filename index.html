@@ -1,7 +1,18 @@
 <head>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
-function myFunction() {
+
+
+var now = "";
+var next = "";
+var priv = "";
+
+function LoadNext() {
+	load();
+}
+
+function load() {
+console.log(next);
 const proxyurl = "https://cors-anywhere.herokuapp.com/";
 const url = "https://readlightnovels.net/lady-lins-first-ever-journey-to-immortality/chapter-81-steal-the-fire-ball-spell.html"; // site that doesn’t send Access-Control-*
 fetch(proxyurl + url) 
@@ -11,11 +22,19 @@ fetch(proxyurl + url)
 }
 
 function insertToHtml(contents) {
+let name = "my name";
+let value = "John Smith"
+
+// кодирует в my%20name=John%20Smith
+document.cookie = encodeURIComponent(name) + '=' + encodeURIComponent(value);
+
 //console.log(htmlText.innerHTML);
 //console.log(htmlText.innerHTML);
 $( "#header" ).append($(contents).find(".chapter-content").find("h3"))
-$( "#content" ).append($(contents).find(".chapter-content").find("p"))
-
+$( "#content" ).append($(contents).find(".chapter-content").find("p")) 
+ 
+next = $(contents).find("#next_chap")[0].href;
+priv = $(contents).find("#priv_chap")[0].href;
 	htmlText.each(function( index ) {
 //	$("body").add('p').text( $( this ).text())
 //	document.body.innerHTML += $( this )
@@ -27,5 +46,7 @@ $( "#content" ).append($(contents).find(".chapter-content").find("p"))
 <body>
 <div id="header"></div>
 <div id="content"></div>
-<button type="button" onclick="myFunction()">Load</button>
+<input id="linkToNovel" type="text" onchange="alert(this.value)">
+<button type="button" onclick="LoadNext()">Next</button>
+<button type="button" onclick="LoadPriv()">Priv</button>
 </body>
