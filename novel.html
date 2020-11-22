@@ -1,0 +1,31 @@
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+function myFunction() {
+const proxyurl = "https://cors-anywhere.herokuapp.com/";
+const url = "https://readlightnovels.net/lady-lins-first-ever-journey-to-immortality/chapter-81-steal-the-fire-ball-spell.html"; // site that doesn’t send Access-Control-*
+fetch(proxyurl + url) 
+.then(response => response.text())
+.then(contents => insertToHtml(contents)
+.catch(() => console.log("Can’t access " + url + " response. Blocked by browser?"))
+}
+
+function insertToHtml(htmlText) {
+//console.log(htmlText.innerHTML);
+//console.log(htmlText.innerHTML);
+$( "#content" ).append($(contents).find(".chapter-content").find("h3")))
+$( "#demo" ).append($(contents).find(".chapter-content").find("p")))
+
+	htmlText.each(function( index ) {
+//	$("body").add('p').text( $( this ).text())
+//	document.body.innerHTML += $( this )
+	 // console.log( index + ": " + $( this ).text() );
+	}); 
+}
+</script>
+</head>
+<body>
+<h1 id="header">A Web Page</h1>
+<div id="content">A Paragraph</p>
+<button type="button" onclick="myFunction()">Try it</button>
+</body>
